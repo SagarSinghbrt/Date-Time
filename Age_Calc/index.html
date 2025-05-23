@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Age Calculator</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				font-family: "Gill Sans", sans-serif;
+			}
+
+			body {
+				background-color: navy;
+				font-family: sans-serif;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.container {
+				background: white;
+				padding: 30px;
+				border-radius: 10px;
+				box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+			input,
+			button {
+				padding: 10px;
+				font-size: 1em;
+				margin: 10px 0;
+			}
+			.result {
+				font-size: 1.2em;
+				margin-top: 15px;
+				color: #333;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h2>Age Calculator</h2>
+			<label for="dob">Enter your birthdate:</label><br />
+			<input type="text" id="dob" /><br />
+			<button onclick="calculateAge()">Calculate Age</button>
+			<div class="result" id="result"></div>
+		</div>
+		<script>
+			function calculateAge() {
+				const input = document.querySelector("input").value.trim();
+				const storeInput = input.split(" ");
+				console.log(storeInput);
+				let useryear, usermonth, userday;
+
+				storeInput.forEach((date) => {
+					if (!isNaN(date)) {
+						if (date.length == 4) {
+							useryear = parseInt(date);
+						} else {
+							userday = parseInt(date);
+						}
+					} else {
+						usermonth = date;
+					}
+				});
+
+				let userDOB = `${useryear}-${usermonth}-${userday}`;
+				let userInputDOB = new Date(userDOB);
+				let now = new Date();
+				let year = now.getFullYear() - userInputDOB.getFullYear();
+				let month = now.getMonth() - userInputDOB.getMonth();
+				let day = now.getDay() - userInputDOB.getDay();
+
+				if (day < 0) {
+					month--;
+					const prevMonth = new Date(
+						now.getFullYear(),
+						now.getMonth(),
+						0
+					);
+					day += prevMonth.getDate();
+				}
+				if (month < 0) {
+					year--;
+					month += 12;
+				}
+
+				console.log(
+					`Years ${useryear} Months ${usermonth} Days ${userday}`
+				);
+			}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Digital Clock</title>
+		<style>
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			html,
+			body {
+				height: 100%;
+				width: 100%;
+				font-family: "Gill Sans", sans-serif;
+			}
+			body {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background: #000;
+			}
+
+			h2 {
+				font-size: 48px;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>00:00:00</h2>
+		<script>
+			const digitalclock = document.querySelector("h2");
+
+			function clockDigital() {
+				const date = new Date();
+				let hours = String(date.getHours()).padStart(2, "0");
+				let minutes = String(date.getMinutes()).padStart(2, "0");
+				let seconds = String(date.getSeconds()).padStart(2, "0");
+				let milisecond = date.getMilliseconds().toLocaleString();
+				digitalclock.innerHTML = `${hours}:${minutes}:${seconds}`;
+			}
+
+			clockDigital();
+
+			setInterval(clockDigital, 1000);
+		</script>
+	</body>
+</html>

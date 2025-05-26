@@ -12,11 +12,10 @@ Welcome to **Data Any Time**, a collection of mini JavaScript projects focused o
 
 ## 📂 Projects Included
 
--   ✅ To-Do List with Persistence
--   🔖 Bookmark Manager
--   🗒️ Notes App
--   📅 Simple Calendar with Storage
--   ➕ More mini projects added weekly...
+-   🗒️ Age Calulator
+-   ⌚ Digital Clock
+-   📅 Guess Time and Date
+-   ⏱️ Stop Watch Timer
 
 ## 🛠️ Getting Started
 

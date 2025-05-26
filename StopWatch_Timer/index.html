@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Stopwatch</title>
+		<style>
+			body {
+				font-family: sans-serif;
+				background: #f0f0f0;
+				text-align: center;
+				padding: 50px;
+			}
+			.stopwatch {
+				background: white;
+				padding: 30px;
+				border-radius: 10px;
+				display: inline-block;
+				box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			}
+			.time {
+				font-size: 2em;
+				margin-bottom: 20px;
+			}
+			button {
+				margin: 5px;
+				padding: 10px 15px;
+				font-size: 1em;
+				border: none;
+				border-radius: 5px;
+				cursor: pointer;
+				background-color: #4caf50;
+				color: white;
+			}
+			button:hover {
+				background-color: #45a049;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="stopwatch">
+			<div class="time" id="display">00:00:00</div>
+			<button onclick="start()">Start</button>
+			<button onclick="togglePause()" id="pauseBtn">Pause</button>
+			<button onclick="reset()">Reset</button>
+		</div>
+
+		<script>
+			let startTime = 0;
+			let duration = 0;
+			let timeInterval;
+			let isPaused = false;
+
+			function formatDate(ms) {
+				let totalSeconds = Math.floor(ms / 1000);
+				let hours = String(Math.floor(totalSeconds / 3600)).padStart(
+					2,
+					"0"
+				);
+				let minutes = String(
+					Math.floor((totalSeconds % 3600) / 60)
+				).padStart(2, "0");
+				let seconds = String(totalSeconds % 60).padStart(2, "0");
+				return `${hours}:${minutes}:${seconds}`;
+			}
+
+			function start() {
+				startTime = Date.now() - duration;
+				if (!timeInterval) {
+					timeInterval = setInterval(() => {
+						duration = Date.now() - startTime;
+						document.querySelector("#display").innerHTML =
+							formatDate(duration);
+					}, 1000);
+				}
+			}
+
+			function togglePause() {
+				let pauseBtn = document.getElementById("pauseBtn");
+
+				if (!isPaused) {
+					isPaused = true;
+					clearInterval(timeInterval);
+					pauseBtn.innerText = "resume";
+				} else {
+					timeInterval = null;
+					start();
+					pauseBtn.innerText = "pause";
+					isPaused = false;
+				}
+			}
+		</script>
+	</body>
+</html>
